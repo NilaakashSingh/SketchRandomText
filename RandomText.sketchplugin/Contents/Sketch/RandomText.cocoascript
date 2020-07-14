@@ -1,0 +1,40 @@
+var randomText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lobortis sem nisl, at suscipit lacus tincidunt et. Nulla ullamcorper mollis nibh sed aliquam. Morbi ex ipsum, ultrices sit amet nunc et, euismod faucibus velit. Aliquam accumsan mollis felis, non ultrices ipsum. Pellentesque tempus sapien odio, vel sagittis felis pretium eget. Cras congue tellus id erat consectetur aliquet. Donec pulvinar facilisis turpis, vel fermentum metus varius id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ut nisi vitae dui tempor tempus pulvinar et sem. Etiam auctor volutpat malesuada. Maecenas lobortis tellus non pellentesque suscipit.";
+var input = "";
+
+function fillLayers(layers) {
+  var count = 0
+  const randomArray = Object.assign([], randomText);
+  for (var i = 0; i < layers.length; ++i) {
+    var layer = layers[i];
+    if (layer.className() == "MSTextLayer") {
+      var newString = "";
+      for (var j = 0; j < Number(input); j++) {
+        if (j >= randomArray.length) {
+          newString = newString + randomArray[j % randomArray.length];
+        } else {
+          newString = newString + randomArray[j];
+        }
+      }
+      [layer setStringValue: newString];
+      [layer setName: "Random Text"];
+      count += 1;
+    } else if (layer.className() == "MSLayerGroup") {
+      count += fillLayer(layer.layers());
+    }
+  }
+  return count;
+}
+
+function onRun(context) {
+  var doc = context.document;
+  var textinput = [doc askForUserInput: "Please fill number of characters required." initialValue: "10"];
+  input = textinput;
+  if (Number(input) > 0) {
+    var count = fillLayers(context.selection)
+    if (count == 0) {
+      context.api().alert("Please select some text objects.", "Oops!");
+    } else {
+      log("Filled: " + count);
+    }
+  }
+}

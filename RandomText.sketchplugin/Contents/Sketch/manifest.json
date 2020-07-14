@@ -1,0 +1,18 @@
+
+{
+    "name" : "Random Text",
+    "identifier" : "neel.randomText",
+    "version" : "1.0",
+    "description" : "Sketch plugin to create lorem ipsum text within limit taken from user input",
+    "authorEmail" : "singhnilaakash@gmail.com",
+    "author" : "Nilaakash Singh",
+    "commands" : [
+    {
+      "script" : "RandomText.cocoascript",
+      "handler" : "onRun",
+      "shortcut" : "command shift n",
+      "name" : "Random Text",
+      "identifier" : "com.neel.randomText"
+    }
+  ]
+}
