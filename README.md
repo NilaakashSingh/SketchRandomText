@@ -1,5 +1,5 @@
 # SketchRandomText
-A Sketch plugin to generate lorem ispsum characters within certain limit count taking input from user. 
+A Sketch plugin to generate lorem ispsum characters within certain limit, taking input count from user. 
 
 ## Install the plugin  
 1. Click on code button in green
